@@ -1,0 +1,52 @@
+﻿@using LoremNET
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/style.css" rel="stylesheet" />
+<section class="container">
+    <div class="login-container">
+        <div class="circle circle-one"></div>
+        <div class="form-container">
+
+            <h1 class="opacity">Авторизация</h1>
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+            <form method="post" asp-action="AuthPage" asp-controller="Home">
+                <input type="text" name="Login" placeholder="Логин" />
+                <input type="password" name="PasswordHash" placeholder="Пароль" />
+                <button class="opacity">Вход</button>
+            </form>
+
+        </div>
+        <div class="circle circle-two"></div>
+    </div>
+    <div class="theme-btn-container"></div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("form").addEventListener("submit", function (event) {
+            var loginInput = document.querySelector("input[name='loginput']").value.trim();
+            var passwordInput = document.querySelector("input[name='passwordput']").value.trim();
+
+            var errorMessage = "";
+
+            if (loginInput.length < 3) {
+                errorMessage += "Логин должен содержать минимум 3 символа.\n";
+            }
+
+            if (passwordInput.length < 3) {
+                errorMessage += "Пароль должен содержать минимум 3 символа.\n";
+            }
+
+            if (errorMessage !== "") {
+                alert(errorMessage);
+                event.preventDefault(); // Отмена отправки формы
+            }
+        });
+    });
+</script>
+<script src="~/js/script.js"></script>

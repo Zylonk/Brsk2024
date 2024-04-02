@@ -1,0 +1,67 @@
+﻿@model List<BrskWebs.Model.Product>
+@{
+    Layout = "/Views/Shared/_User.cshtml";
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Количество на складе</th>
+            <th>Количество заказа</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.StockQuantity</td>
+                <td id="quantity_@product.ProductId">1</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="decreaseQuantity('@product.ProductId')">-</button>
+                    <button class="btn btn-sm btn-primary" onclick="increaseQuantity('@product.ProductId')">+</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="orderForm" method="post" action="/User/PlaceOrder">
+    <button type="submit" class="btn btn-primary">Оформить заказ</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function decreaseQuantity(productId) {
+        $.ajax({
+            url: '/User/DecreaseQuantity',
+            type: 'POST',
+            data: { productId: productId },
+            success: function (response) {
+                $('#quantity_' + productId).text(response);
+            }
+        });
+    }
+
+    function increaseQuantity(productId) {
+        $.ajax({
+            url: '/User/IncreaseQuantity',
+            type: 'POST',
+            data: { productId: productId },
+            success: function (response) {
+                $('#quantity_' + productId).text(response);
+            }
+        });
+    }
+</script>

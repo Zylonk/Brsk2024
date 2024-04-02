@@ -1,0 +1,116 @@
+﻿@using LoremNET
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #121212;
+        color: #fff;
+    }
+
+    .product-list {
+        margin-top: 30px;
+    }
+
+    .product-item {
+        background-color: #333;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+
+        .product-item h3 {
+            margin-top: 0;
+        }
+
+        .product-item p {
+            margin-bottom: 0;
+        }
+
+    .product-img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+</style>
+
+<script src="/js/cb.js"></script>
+<form method="post" asp-action="ShopPage" asp-controller="Home" id="searchForm">
+    <div class="container">
+        <div class="search-filter-sort">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" id="textInput" name="SerchInput" class="form-control" placeholder="Поиск">
+                </div>
+                <div class="col-md-4">
+                    <select name="filter" id="filter" class="form-control" placeholder="Фильтрация">
+                        <option>Все</option>
+                        <option>До 0 - 500 </option>
+                        <option>От 500 - 5000</option>
+                        <option>Более 5000</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <select name="sort" id="sort" class="form-control" placeholder="Сортировка">
+                            <option>Убыванию</option>
+                            <option>Возрастанию</option>
+                        </select>
+                        <button class="btn btn-outline-light" type="submit">Поиск</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row product-list">
+            @if (ViewBag.Product != null)
+            {
+                foreach (var i in ViewBag.Product)
+                {
+                    <div class="col-md-6">
+                        <div class="product-item">
+                            <img src="/Res/placeholder.jpg" alt="Товар 1" class="product-img">
+                            <h3>@i.ProductName</h3>
+                            <p>Цена: @i.Price руб</p>
+                            <p>Описание:@i.Description г</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</form>
+<script>
+    // Проверяем, поддерживает ли браузер localStorage
+    if (typeof (Storage) !== "undefined") {
+        // Функция для сохранения значений полей формы
+        function saveFormValues() {
+            var searchInput = document.getElementById('textInput').value;
+            var filter = document.getElementById('filter').value;
+            var sort = document.getElementById('sort').value;
+            localStorage.setItem('searchInput', searchInput);
+            localStorage.setItem('filter', filter);
+            localStorage.setItem('sort', sort);
+        }
+
+        // Функция для восстановления значений полей формы
+        function restoreFormValues() {
+            var searchInput = localStorage.getItem('searchInput');
+            var filter = localStorage.getItem('filter');
+            var sort = localStorage.getItem('sort');
+            if (searchInput) document.getElementById('textInput').value = searchInput;
+            if (filter) document.getElementById('filter').value = filter;
+            if (sort) document.getElementById('sort').value = sort;
+        }
+
+        // Вызываем функцию для восстановления значений при загрузке страницы
+        window.onload = restoreFormValues;
+
+        // Вызываем функцию для сохранения значений при отправке формы
+        document.getElementById('searchForm').addEventListener('submit', saveFormValues);
+    } else {
+        console.log("Sorry, your browser does not support web storage...");
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

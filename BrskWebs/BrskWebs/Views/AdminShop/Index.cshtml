@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "/Views/Shared/_AdminShop.cshtml";
+}
+<div class="container">
+    <h1 class="my-3 text-center"></h1>
+    <h1>Задачи</h1>
+    <table class="table table-hover table-borderless">
+        <thead>
+            <tr>
+
+                <th>Номер</th>
+                <th>Id Пользователя</th>
+                <th>Дата заказа</th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var i in ViewBag.Order)
+                {
+                    <tr>
+                        <td>@i.OrderId</td>
+                        <td>@i.UserId</td>
+                        <td>@i.OrderDate</td>
+                        <td>@i.Status</td>
+                        <td><a class="text-center" href="/AdminShop/PutStatus/@i.OrderId">Редактировать</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

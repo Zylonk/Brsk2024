@@ -1,0 +1,71 @@
+﻿@page
+@using BrskWebs.Controllers;
+@model UserController;
+@{
+    Layout = "/Views/Shared/_User.cshtml";
+}
+<h1>Список товаров</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in ViewBag.Products)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>
+                    @if (product.StockQuantity > 0)
+                    {
+                        <form class="add-to-cart-form" method="post" asp-action="AddToCart">
+                            <input type="hidden" name="productId" value="@product.ProductId" />
+                            <button type="submit" class="btn btn-primary add-to-cart-button">Добавить в корзину</button>
+                            <p class="added-to-cart-message" style="display:none;">Вы успешно добавили в корзину</p>
+                        </form>
+                    }
+                    else
+                    {
+                        <p>Нету в наличии</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(document).on("submit", ".add-to-cart-form", function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var button = form.find('button[type="submit"]');
+                var message = form.find('.added-to-cart-message');
+
+                $.post(form.attr('action'), form.serialize(), function () {
+                    button.hide();
+                    message.show();
+                });
+            });
+        });
+    </script>
+    
+}
+}

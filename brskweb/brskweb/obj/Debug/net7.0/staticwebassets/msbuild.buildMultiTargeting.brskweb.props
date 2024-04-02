@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\brskweb.props" />
+</Project>

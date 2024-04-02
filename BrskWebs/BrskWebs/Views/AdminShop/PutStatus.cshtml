@@ -1,0 +1,38 @@
+﻿@model BrskWebs.Model.Order
+@{
+    Layout = "/Views/Shared/_AdminShop.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Редактирование</div>
+
+                <div class="card-body">
+                    <form asp-action="PutsStatus" asp-controller="AdminShop" asp-route-id="@Model.OrderId">
+                        
+                        <div class="row mb-3">
+                            <label for="Prioryty" class="col-md-4 col-form-label text-md-end">Статус</label>
+                            <div class="col-md-6">
+                                <select asp-for="Status" class="form-control" name="status" id="status">
+                                    <option>В процессе</option>
+                                    <option>Готов</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" name="OrderId" value="@Model.OrderId" class="btn btn-primary">
+                                    Редактировать
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

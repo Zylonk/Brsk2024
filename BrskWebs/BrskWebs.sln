@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrskWebs", "BrskWebs\BrskWebs.csproj", "{B623D41A-FF9A-4BB4-A766-D6F9B64C3D15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B623D41A-FF9A-4BB4-A766-D6F9B64C3D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B623D41A-FF9A-4BB4-A766-D6F9B64C3D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B623D41A-FF9A-4BB4-A766-D6F9B64C3D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B623D41A-FF9A-4BB4-A766-D6F9B64C3D15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FD051E1-E59C-4CF3-A0E8-F7791A5A9A51}
+	EndGlobalSection
+EndGlobal
